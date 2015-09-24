@@ -68,7 +68,6 @@ function addBounce(map){
         
         marker.on('click', function () {
             marker.bounce({duration: 500, height: 100});
-
         });
     });
 }
@@ -89,6 +88,8 @@ function addLayer(layer, name, zIndex) {
     link.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
+
+	map.setView(center, map.getZoom());
 
         if (map.hasLayer(layer)) {
             map.removeLayer(layer);
