@@ -56,3 +56,16 @@ body {
 .menu-ui a.active:hover {
     background: #3074a4;
 }
+
+#buttonContainer {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+}
+
+.filterButton {
+    position: relative;
+    width: 100%;
+    float: left;
+    clear: both;
+}

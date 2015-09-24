@@ -32,20 +32,29 @@ var map = L.map('map').setView([
 // Append it to the map
 //var ucTiles = L.tileLayer(url).addTo(map);
 
-var rgbLayer = "https://tile-{s}.urthecast.com/v1/rgb/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret,
-    ndviLayer = "https://tile-{s}.urthecast.com/v1/ndvi/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret,
-    ndwiLayer = "https://tile-{s}.urthecast.com/v1/ndwi/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret,
-    fcnirLayer = "https://tile-{s}.urthecast.com/v1/false-color-nir/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret,
-    eviLayer = "https://tile-{s}.urthecast.com/v1/evi/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret;
-    
-// Append them to the map
-addLayer(L.tileLayer(rgbLayer).addTo(map), 'RGB', 1);
-addLayer(L.tileLayer(ndviLayer).addTo(map), 'NDVI', 2);
-addLayer(L.tileLayer(ndwiLayer).addTo(map), 'NDWI', 3);
-addLayer(L.tileLayer(fcnirLayer).addTo(map), 'False Color NIR', 4);
-addLayer(L.tileLayer(eviLayer).addTo(map), 'EVI', 5);
+var baseLayer = new L.tileLayer("https://tile-{s}.urthecast.com/v1/rgb/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret);
+var rgbLayer = new L.tileLayer("https://tile-{s}.urthecast.com/v1/rgb/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret+'&id=Fo4XzqtWQkaLO2jj-igVbA');
+var ndviLayer = new L.tileLayer("https://tile-{s}.urthecast.com/v1/ndvi/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret);
+var ndwiLayer = new L.tileLayer("https://tile-{s}.urthecast.com/v1/ndwi/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret);
+    // fcnirLayer = "https://tile-{s}.urthecast.com/v1/false-color-nir/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret,
+    // eviLayer = "https://tile-{s}.urthecast.com/v1/evi/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret;
+ 
+map.addLayer(baseLayer);   
+map.addLayer(rgbLayer);
+addBounce(map);
 
-addBounce(map)
+
+
+function switchLayer(button) {
+
+	console.log('WHATTT');
+
+	var layerType = this.val();
+
+	console.log(layerType);
+}
+
+
 
 function addBounce(map){
     var markerLayer = new L.featureGroup();
@@ -61,7 +70,7 @@ function addBounce(map){
 
         center = [lat, lng];
 
-        map.setView(center, 10);
+        map.setView(center, map.getZoom());
 
         marker = new L.Marker([lat, lng], {bounceOnAdd: true}).addTo(map);
         markerLayer.addLayer(marker);
@@ -72,37 +81,9 @@ function addBounce(map){
     });
 }
 
-// From https://www.mapbox.com/mapbox.js/example/v1.0.0/layers/
-function addLayer(layer, name, zIndex) {
-    layer
-        .setZIndex(zIndex)
-        .addTo(map);
+$('.filterButton').on('click', function() {
 
-    // Create a simple layer switcher that
-    // toggles layers on and off.
-    var link = document.createElement('a');
-        link.href = '#';
-        link.className = 'active';
-        link.innerHTML = name;
-
-    link.onclick = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-	map.setView(center, map.getZoom());
-
-        if (map.hasLayer(layer)) {
-            map.removeLayer(layer);
-            this.className = '';
-        } else {
-            map.addLayer(layer);
-            this.className = 'active';
-        }
-    };
-    
-    var layers = document.getElementById('menu-ui');
-
-    layers.appendChild(link);
-}
+	alert('whaT!?!');
+})
 
 
