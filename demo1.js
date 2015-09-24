@@ -33,9 +33,10 @@ var map = L.map('map').setView([
 //var ucTiles = L.tileLayer(url).addTo(map);
 
 var filterType = 'rgb';
+var sceneId = 'Fo4XzqtWQkaLO2jj-igVbA';
 
 var baseLayer = new L.tileLayer("https://tile-{s}.urthecast.com/v1/rgb/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret);
-var sceneLayer = new L.tileLayer("https://tile-{s}.urthecast.com/v1/"+filterType+"/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret+'&id=Fo4XzqtWQkaLO2jj-igVbA');
+var sceneLayer = new L.tileLayer("https://tile-{s}.urthecast.com/v1/"+filterType+"/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret+'&id='+sceneId);
 // var ndviLayer = new L.tileLayer("https://tile-{s}.urthecast.com/v1/ndvi/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret);
 // var ndwiLayer = new L.tileLayer("https://tile-{s}.urthecast.com/v1/ndwi/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret);
     // fcnirLayer = "https://tile-{s}.urthecast.com/v1/false-color-nir/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret,
@@ -61,6 +62,16 @@ function switchLayer(button) {
 
 }
 
+function playScenes(sceneData) {
+
+    console.log(sceneData);
+
+    for (var i=0; i < sceneData[0].length; i++) {
+        console.log(sceneData[0][i]);
+        console.log(sceneData[1][i]);
+    }
+
+}
 
 
 function addBounce(map){
@@ -81,6 +92,9 @@ function addBounce(map){
 
         marker = new L.Marker([lat, lng], {bounceOnAdd: true}).addTo(map);
         markerLayer.addLayer(marker);
+
+        var sceneData = getScenes(String(lat), String(lng), playScenes);
+
         
         marker.on('click', function () {
             marker.bounce({duration: 500, height: 100});
@@ -88,9 +102,14 @@ function addBounce(map){
     });
 }
 
+
 $('.filterButton').on('click', function() {
 
 	switchLayer(this);
-})
+});
+
+
+
+
 
 
