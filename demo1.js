@@ -15,8 +15,10 @@ if (!localStorage.getItem('uc_api_secret')) {
 }
 
 // Confirm we've got 'em by displaying them to the screen
-var apiKey = localStorage.getItem('uc_api_key'),
-    apiSecret = localStorage.getItem('uc_api_secret');
+//var apiKey = localStorage.getItem('uc_api_key'),
+//    apiSecret = localStorage.getItem('uc_api_secret');
+apiKey = "1D5F7B2B5D464C649320"
+apiSecret = "847426A8A04C425BB377CE8BAC26F48D"
 
 // Create a Leaflet map
 var map = L.map('map').setView([
