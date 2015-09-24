@@ -29,3 +29,27 @@ var url = "https://tile-{s}.urthecast.com/v1/rgb/{z}/{x}/{y}?api_key="+apiKey+"&
 
 // Append it to the map
 var ucTiles = L.tileLayer(url).addTo(map);
+
+var markerLayer = new L.featureGroup();
+
+map.addLayer(markerLayer);
+
+map.on('click', function(e) {
+
+	markerLayer.clearLayers();
+
+	var lat = e.latlng.lat;
+	var lng =e.latlng.lng;
+
+	center = [lat, lng];
+
+	map.setView(center, 10);
+
+    marker = new L.Marker([lat, lng], {bounceOnAdd: true}).addTo(map);
+    markerLayer.addLayer(marker);
+    
+	marker.on('click', function () {
+    	marker.bounce({duration: 500, height: 100});
+
+	});
+});
