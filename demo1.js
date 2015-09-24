@@ -45,7 +45,7 @@ map.on('click', function(e) {
 
 	center = [lat, lng];
 
-	map.setView(center, 10);
+	map.setView(center, map.getZoom());
 
     marker = new L.Marker([lat, lng], {bounceOnAdd: true}).addTo(map);
     markerLayer.addLayer(marker);
