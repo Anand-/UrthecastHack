@@ -23,11 +23,29 @@ body {
     text-align: center;
 }
 
-#slider {
+#sliderContainer {
     position: absolute;
-    margin-top: 600px;
-    margin-left: 33%;
-    z-index: 0;
+    width: 60%;
+    top: 90%;
+    left: 20%;
+    height: 60px;
+
+}
+
+#playScenes {
+    position: relative;
+    float: left;
+    width: 60px;
+    height: 40px;
+    background: white;
+    margin-right: 20px;
+}
+
+
+#slider {
+    position: relative;
+    float: left;
+    margin-top: 10px;
 }
 
 .slider-width {
@@ -84,7 +102,8 @@ body {
 #buttonContainer {
     position: absolute;
     top: 80px;
-    right: 50px;
+    right: 30px;
+    width: 100px;
 }
 
 .filterButton {
@@ -94,13 +113,15 @@ body {
     clear: both;
 }
 
-#playScenes {
-    position: fixed;
-    z-index: 99999;
-    left: 33%;
-    top: 80%;
-    width: 40px;
-    height: 40px;
+.filterButton, #playScenes {
     background: white;
+    border-radius: 2px;
+    color: #222222;
+    border: 1px solid #909090;
+    height: 40px;
 }
 
+#rgbFilter {
+    background: #222222;
+    color: #ffffff;
+}
