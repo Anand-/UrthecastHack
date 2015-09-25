@@ -86,16 +86,6 @@ function playScenes(sceneData) {
          playScenes(sceneData);         
       }                       
    }, 3000);
-
-    // for (var i=0; i < sceneData[0].length; i++) {
-
-
-    //         updateScene(sceneData[1][i]);
-    //         console.log(i);
-    //         console.log(sceneData[1][i]);
-
-        // console.log(sceneData[0][i]);
-        // console.log(sceneData[1][i]);
 }
 
 
@@ -105,6 +95,8 @@ function addBounce(map){
     map.addLayer(markerLayer);
 
     map.on('click', function(e) {
+
+        playScenesCounter = 0;
 
         markerLayer.clearLayers();
 
