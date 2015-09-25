@@ -50,27 +50,52 @@ addBounce(map);
 
 function switchLayer(button) {
 
-	var filterType = button.value;
+	filterType = button.value;
 
 	console.log(filterType);
 
 	map.removeLayer(sceneLayer);
 
-	sceneLayer = L.tileLayer("https://tile-{s}.urthecast.com/v1/"+filterType+"/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret+'&id=Fo4XzqtWQkaLO2jj-igVbA');
+	sceneLayer = L.tileLayer("https://tile-{s}.urthecast.com/v1/"+filterType+"/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret+'&id='+sceneId);
 
 	map.addLayer(sceneLayer);
 
 }
 
+function updateScene(newSceneId) {
+
+    sceneId = newSceneId;
+
+    map.removeLayer(sceneLayer);
+
+    sceneLayer = L.tileLayer("https://tile-{s}.urthecast.com/v1/"+filterType+"/{z}/{x}/{y}?api_key="+apiKey+"&api_secret="+apiSecret+'&id='+sceneId);
+
+    map.addLayer(sceneLayer);
+}
+
+var playScenesCounter = 0;
+
 function playScenes(sceneData) {
 
-    console.log(sceneData);
+    setTimeout(function () {    
+        
+    updateScene(sceneData[1][playScenesCounter]);
 
-    for (var i=0; i < sceneData[0].length; i++) {
-        console.log(sceneData[0][i]);
-        console.log(sceneData[1][i]);
-    }
+    playScenesCounter++;                    
+      if (playScenesCounter < sceneData[0].length) {           
+         playScenes(sceneData);         
+      }                       
+   }, 3000);
 
+    // for (var i=0; i < sceneData[0].length; i++) {
+
+
+    //         updateScene(sceneData[1][i]);
+    //         console.log(i);
+    //         console.log(sceneData[1][i]);
+
+        // console.log(sceneData[0][i]);
+        // console.log(sceneData[1][i]);
 }
 
 
