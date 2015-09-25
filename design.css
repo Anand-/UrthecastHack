@@ -69,3 +69,13 @@ body {
     float: left;
     clear: both;
 }
+
+#playScenes {
+    position: fixed;
+    z-index: 99999;
+    left: 33%;
+    top: 80%;
+    width: 40px;
+    height: 40px;
+    background: white;
+}

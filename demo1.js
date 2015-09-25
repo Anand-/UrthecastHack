@@ -1,19 +1,3 @@
-// Get the user's API key via prompt
-// if (!localStorage.getItem('uc_api_key')) {
-//     localStorage.setItem(
-//     	'uc_api_key', 
-//         prompt('What is your UC API key?')
-//     );
-// }
-
-// // Get the user's API secret via prompt
-// if (!localStorage.getItem('uc_api_secret')) {
-//     localStorage.setItem(
-//         'uc_api_secret', 
-// 		prompt('What is your UC API secret?')
-//     );
-// }
-
 // Confirm we've got 'em by displaying them to the screen
 //var apiKey = localStorage.getItem('uc_api_key'),
 //    apiSecret = localStorage.getItem('uc_api_secret');
@@ -74,6 +58,7 @@ function updateScene(newSceneId) {
 }
 
 var playScenesCounter = 0;
+var updatedSceneData = '';
 
 function playScenes(sceneData) {
 
@@ -84,8 +69,18 @@ function playScenes(sceneData) {
     playScenesCounter++;                    
       if (playScenesCounter < sceneData[0].length) {           
          playScenes(sceneData);         
+      }
+
+      else if (playScenesCounter == sceneData[0].length) {
+        playScenesCounter = 0;
+        playScenes(sceneData);
       }                       
    }, 3000);
+}
+
+function updateSceneData(sceneData) {
+
+    updatedSceneData = sceneData;
 }
 
 
@@ -110,7 +105,7 @@ function addBounce(map){
         marker = new L.Marker([lat, lng], {bounceOnAdd: true}).addTo(map);
         markerLayer.addLayer(marker);
 
-        var sceneData = getScenes(String(lat), String(lng), playScenes);
+        var sceneData = getScenes(String(lat), String(lng), updateSceneData);
 
         
         marker.on('click', function () {
@@ -122,9 +117,16 @@ function addBounce(map){
 
 $('.filterButton').on('click', function() {
 
+    playScenesCounter = 0;
+
 	switchLayer(this);
 });
 
+
+$('#playScenes').on('click', function() {
+
+    playScenes(updatedSceneData);
+});
 
 
 
